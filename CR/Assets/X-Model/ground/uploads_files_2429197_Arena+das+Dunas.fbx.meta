@@ -1,0 +1,240 @@
+fileFormatVersion: 2
+guid: 09754ae5c95125f4993cbcf7de0957ce
+timeCreated: 1652807453
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Compass001
+    100002: Google Earth Snapshot_001
+    100004: Google Earth Terrain_001
+    100006: input_Daylight_001
+    100008: Layer0_001
+    100010: Layer0_001 1
+    100012: Layer0_001 10
+    100014: Layer0_001 11
+    100016: Layer0_001 12
+    100018: Layer0_001 13
+    100020: Layer0_001 14
+    100022: Layer0_001 15
+    100024: Layer0_001 16
+    100026: Layer0_001 17
+    100028: Layer0_001 18
+    100030: Layer0_001 19
+    100032: Layer0_001 2
+    100034: Layer0_001 20
+    100036: Layer0_001 21
+    100038: Layer0_001 22
+    100040: Layer0_001 23
+    100042: Layer0_001 24
+    100044: Layer0_001 25
+    100046: Layer0_001 3
+    100048: Layer0_001 4
+    100050: Layer0_001 5
+    100052: Layer0_001 6
+    100054: Layer0_001 7
+    100056: Layer0_001 8
+    100058: Layer0_001 9
+    100060: Layer0_002
+    100062: Layer0_003
+    100064: skpCamera001
+    100066: skpCamera001.Target
+    100068: Sky002
+    100070: Sun001
+    100072: //RootNode
+    400000: Compass001
+    400002: Google Earth Snapshot_001
+    400004: Google Earth Terrain_001
+    400006: input_Daylight_001
+    400008: Layer0_001
+    400010: Layer0_001 1
+    400012: Layer0_001 10
+    400014: Layer0_001 11
+    400016: Layer0_001 12
+    400018: Layer0_001 13
+    400020: Layer0_001 14
+    400022: Layer0_001 15
+    400024: Layer0_001 16
+    400026: Layer0_001 17
+    400028: Layer0_001 18
+    400030: Layer0_001 19
+    400032: Layer0_001 2
+    400034: Layer0_001 20
+    400036: Layer0_001 21
+    400038: Layer0_001 22
+    400040: Layer0_001 23
+    400042: Layer0_001 24
+    400044: Layer0_001 25
+    400046: Layer0_001 3
+    400048: Layer0_001 4
+    400050: Layer0_001 5
+    400052: Layer0_001 6
+    400054: Layer0_001 7
+    400056: Layer0_001 8
+    400058: Layer0_001 9
+    400060: Layer0_002
+    400062: Layer0_003
+    400064: skpCamera001
+    400066: skpCamera001.Target
+    400068: Sky002
+    400070: Sun001
+    400072: //RootNode
+    2300000: Google Earth Snapshot_001
+    2300002: Google Earth Terrain_001
+    2300004: Layer0_001 1
+    2300006: Layer0_001 10
+    2300008: Layer0_001 11
+    2300010: Layer0_001 12
+    2300012: Layer0_001 13
+    2300014: Layer0_001 14
+    2300016: Layer0_001 15
+    2300018: Layer0_001 16
+    2300020: Layer0_001 17
+    2300022: Layer0_001 18
+    2300024: Layer0_001 19
+    2300026: Layer0_001 2
+    2300028: Layer0_001 20
+    2300030: Layer0_001 21
+    2300032: Layer0_001 22
+    2300034: Layer0_001 23
+    2300036: Layer0_001 24
+    2300038: Layer0_001 25
+    2300040: Layer0_001 3
+    2300042: Layer0_001 4
+    2300044: Layer0_001 5
+    2300046: Layer0_001 6
+    2300048: Layer0_001 7
+    2300050: Layer0_001 8
+    2300052: Layer0_001 9
+    2300054: Layer0_002
+    2300056: Layer0_003
+    3300000: Google Earth Snapshot_001
+    3300002: Google Earth Terrain_001
+    3300004: Layer0_001 1
+    3300006: Layer0_001 10
+    3300008: Layer0_001 11
+    3300010: Layer0_001 12
+    3300012: Layer0_001 13
+    3300014: Layer0_001 14
+    3300016: Layer0_001 15
+    3300018: Layer0_001 16
+    3300020: Layer0_001 17
+    3300022: Layer0_001 18
+    3300024: Layer0_001 19
+    3300026: Layer0_001 2
+    3300028: Layer0_001 20
+    3300030: Layer0_001 21
+    3300032: Layer0_001 22
+    3300034: Layer0_001 23
+    3300036: Layer0_001 24
+    3300038: Layer0_001 25
+    3300040: Layer0_001 3
+    3300042: Layer0_001 4
+    3300044: Layer0_001 5
+    3300046: Layer0_001 6
+    3300048: Layer0_001 7
+    3300050: Layer0_001 8
+    3300052: Layer0_001 9
+    3300054: Layer0_002
+    3300056: Layer0_003
+    4300000: Layer0_001
+    4300002: Layer0_001
+    4300004: Layer0_001
+    4300006: Layer0_001
+    4300008: Layer0_001
+    4300010: Layer0_001
+    4300012: Layer0_001
+    4300014: Layer0_001
+    4300016: Layer0_001
+    4300018: Layer0_001
+    4300020: Layer0_001
+    4300022: Layer0_001
+    4300024: Layer0_001
+    4300026: Layer0_001
+    4300028: Layer0_001
+    4300030: Layer0_001
+    4300032: Layer0_001
+    4300034: Layer0_001
+    4300036: Layer0_001
+    4300038: Layer0_001
+    4300040: Layer0_001
+    4300042: Layer0_001
+    4300044: Layer0_001
+    4300046: Layer0_001
+    4300048: Layer0_001
+    4300050: Layer0_002
+    4300052: Layer0_003
+    4300054: Google Earth Terrain_001
+    4300056: Google Earth Snapshot_001
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

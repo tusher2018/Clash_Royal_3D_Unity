@@ -1,0 +1,243 @@
+fileFormatVersion: 2
+guid: f88f9e33481878e4ca45b9ee8a0ad79a
+timeCreated: 1652529583
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: chest
+    100002: chest_MeshPart0
+    100004: chest_MeshPart1
+    100006: chest_MeshPart2
+    100008: chest_MeshPart3
+    100010: elbow
+    100012: elbow.001
+    100014: foot left
+    100016: foot right
+    100018: hand left
+    100020: hand right
+    100022: head
+    100024: hip
+    100026: hip leg
+    100028: hip leg.001
+    100030: inner armor
+    100032: knee
+    100034: knee.001
+    100036: lower arm
+    100038: lower arm.001
+    100040: lower leg
+    100042: lower leg.001
+    100044: neck
+    100046: shouder
+    100048: shouder.001
+    100050: //RootNode
+    100052: upper arm
+    100054: upper arm.001
+    100056: upper leg
+    100058: upper leg.001
+    100060: weist
+    100062: weist_MeshPart0
+    100064: weist_MeshPart1
+    100066: wrist left
+    100068: wrist right
+    400000: chest
+    400002: chest_MeshPart0
+    400004: chest_MeshPart1
+    400006: chest_MeshPart2
+    400008: chest_MeshPart3
+    400010: elbow
+    400012: elbow.001
+    400014: foot left
+    400016: foot right
+    400018: hand left
+    400020: hand right
+    400022: head
+    400024: hip
+    400026: hip leg
+    400028: hip leg.001
+    400030: inner armor
+    400032: knee
+    400034: knee.001
+    400036: lower arm
+    400038: lower arm.001
+    400040: lower leg
+    400042: lower leg.001
+    400044: neck
+    400046: shouder
+    400048: shouder.001
+    400050: //RootNode
+    400052: upper arm
+    400054: upper arm.001
+    400056: upper leg
+    400058: upper leg.001
+    400060: weist
+    400062: weist_MeshPart0
+    400064: weist_MeshPart1
+    400066: wrist left
+    400068: wrist right
+    2300000: chest_MeshPart0
+    2300002: chest_MeshPart1
+    2300004: chest_MeshPart2
+    2300006: chest_MeshPart3
+    2300008: elbow
+    2300010: elbow.001
+    2300012: foot left
+    2300014: foot right
+    2300016: hand left
+    2300018: hand right
+    2300020: head
+    2300022: hip
+    2300024: hip leg
+    2300026: hip leg.001
+    2300028: inner armor
+    2300030: knee
+    2300032: knee.001
+    2300034: lower arm
+    2300036: lower arm.001
+    2300038: lower leg
+    2300040: lower leg.001
+    2300042: neck
+    2300044: shouder
+    2300046: shouder.001
+    2300048: upper arm
+    2300050: upper arm.001
+    2300052: upper leg
+    2300054: upper leg.001
+    2300056: weist_MeshPart0
+    2300058: weist_MeshPart1
+    2300060: wrist left
+    2300062: wrist right
+    3300000: chest_MeshPart0
+    3300002: chest_MeshPart1
+    3300004: chest_MeshPart2
+    3300006: chest_MeshPart3
+    3300008: elbow
+    3300010: elbow.001
+    3300012: foot left
+    3300014: foot right
+    3300016: hand left
+    3300018: hand right
+    3300020: head
+    3300022: hip
+    3300024: hip leg
+    3300026: hip leg.001
+    3300028: inner armor
+    3300030: knee
+    3300032: knee.001
+    3300034: lower arm
+    3300036: lower arm.001
+    3300038: lower leg
+    3300040: lower leg.001
+    3300042: neck
+    3300044: shouder
+    3300046: shouder.001
+    3300048: upper arm
+    3300050: upper arm.001
+    3300052: upper leg
+    3300054: upper leg.001
+    3300056: weist_MeshPart0
+    3300058: weist_MeshPart1
+    3300060: wrist left
+    3300062: wrist right
+    4300000: head
+    4300002: neck
+    4300004: chest_MeshPart0
+    4300006: chest_MeshPart1
+    4300008: chest_MeshPart2
+    4300010: chest_MeshPart3
+    4300012: weist_MeshPart0
+    4300014: weist_MeshPart1
+    4300016: shouder
+    4300018: upper arm
+    4300020: lower arm
+    4300022: elbow
+    4300024: inner armor
+    4300026: hip
+    4300028: upper leg
+    4300030: hip leg
+    4300032: knee
+    4300034: lower leg
+    4300036: shouder.001
+    4300038: upper arm.001
+    4300040: lower arm.001
+    4300042: hip leg.001
+    4300044: upper leg.001
+    4300046: lower leg.001
+    4300048: elbow.001
+    4300050: wrist left
+    4300052: wrist right
+    4300054: foot left
+    4300056: foot right
+    4300058: hand left
+    4300060: hand right
+    4300062: knee.001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

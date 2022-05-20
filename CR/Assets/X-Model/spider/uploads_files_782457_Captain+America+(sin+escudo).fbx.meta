@@ -1,0 +1,228 @@
+fileFormatVersion: 2
+guid: 949e214aeabc4c745a1bf86fa8ea2d6c
+timeCreated: 1652529412
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: abdomen
+    100002: ANTEBRAZO
+    100004: antebrazo
+    100006: ANTEBRAZO_
+    100008: antebrazo_2
+    100010: BRAZO_DERECHO
+    100012: BRAZO_DERECHO_2
+    100014: BRAZO_IZQUIERDO
+    100016: BRAZO_IZQUIERDO_2
+    100018: cabeza
+    100020: CADERA
+    100022: Capitan_America
+    100024: dedo
+    100026: dedo1
+    100028: dedo_1
+    100030: dedo_2
+    100032: dedo_2_2
+    100034: dedo_3
+    100036: dedo_3_2
+    100038: dedo_4
+    100040: dedo_4_2
+    100042: dedo_5
+    100044: DEDOS
+    100046: dedos
+    100048: espalda
+    100050: Junta_1
+    100052: Junta_1_10
+    100054: Junta_1_11
+    100056: Junta_1_12
+    100058: Junta_1_2
+    100060: Junta_1_3
+    100062: Junta_1_4
+    100064: Junta_1_5
+    100066: Junta_1_6
+    100068: Junta_1_7
+    100070: Junta_1_8
+    100072: Junta_1_9
+    100074: Junta_2
+    100076: Junta_2_10
+    100078: Junta_2_11
+    100080: Junta_2_12
+    100082: Junta_2_2
+    100084: Junta_2_3
+    100086: Junta_2_4
+    100088: Junta_2_5
+    100090: Junta_2_6
+    100092: Junta_2_7
+    100094: Junta_2_8
+    100096: Junta_2_9
+    100098: Junta_3
+    100100: Junta_3_10
+    100102: Junta_3_11
+    100104: Junta_3_12
+    100106: Junta_3_13
+    100108: Junta_3_2
+    100110: Junta_3_3
+    100112: Junta_3_4
+    100114: Junta_3_5
+    100116: Junta_3_6
+    100118: Junta_3_7
+    100120: Junta_3_8
+    100122: Junta_3_9
+    100124: Junta_5
+    100126: MANO
+    100128: MANO_2
+    100130: PIE
+    100132: PIE_2
+    100134: PIERNA
+    100136: PIERNA_2
+    100138: PIERNA_DERECHA
+    100140: PIERNA_DERECHA_2
+    100142: PIERNA_IZQUIERDA
+    100144: PIERNA_IZQUIERDA_2
+    100146: //RootNode
+    400000: abdomen
+    400002: ANTEBRAZO
+    400004: antebrazo
+    400006: ANTEBRAZO_
+    400008: antebrazo_2
+    400010: BRAZO_DERECHO
+    400012: BRAZO_DERECHO_2
+    400014: BRAZO_IZQUIERDO
+    400016: BRAZO_IZQUIERDO_2
+    400018: cabeza
+    400020: CADERA
+    400022: Capitan_America
+    400024: dedo
+    400026: dedo1
+    400028: dedo_1
+    400030: dedo_2
+    400032: dedo_2_2
+    400034: dedo_3
+    400036: dedo_3_2
+    400038: dedo_4
+    400040: dedo_4_2
+    400042: dedo_5
+    400044: DEDOS
+    400046: dedos
+    400048: espalda
+    400050: Junta_1
+    400052: Junta_1_10
+    400054: Junta_1_11
+    400056: Junta_1_12
+    400058: Junta_1_2
+    400060: Junta_1_3
+    400062: Junta_1_4
+    400064: Junta_1_5
+    400066: Junta_1_6
+    400068: Junta_1_7
+    400070: Junta_1_8
+    400072: Junta_1_9
+    400074: Junta_2
+    400076: Junta_2_10
+    400078: Junta_2_11
+    400080: Junta_2_12
+    400082: Junta_2_2
+    400084: Junta_2_3
+    400086: Junta_2_4
+    400088: Junta_2_5
+    400090: Junta_2_6
+    400092: Junta_2_7
+    400094: Junta_2_8
+    400096: Junta_2_9
+    400098: Junta_3
+    400100: Junta_3_10
+    400102: Junta_3_11
+    400104: Junta_3_12
+    400106: Junta_3_13
+    400108: Junta_3_2
+    400110: Junta_3_3
+    400112: Junta_3_4
+    400114: Junta_3_5
+    400116: Junta_3_6
+    400118: Junta_3_7
+    400120: Junta_3_8
+    400122: Junta_3_9
+    400124: Junta_5
+    400126: MANO
+    400128: MANO_2
+    400130: PIE
+    400132: PIE_2
+    400134: PIERNA
+    400136: PIERNA_2
+    400138: PIERNA_DERECHA
+    400140: PIERNA_DERECHA_2
+    400142: PIERNA_IZQUIERDA
+    400144: PIERNA_IZQUIERDA_2
+    400146: //RootNode
+    4300000: Capitan_America
+    9500000: //RootNode
+    13700000: Capitan_America
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
