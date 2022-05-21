@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 114583752173162664}
   m_Layer: 0
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ Transform:
   m_GameObject: {fileID: 1572483434473596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 140.43163, y: 484.3409, z: 94.84863}
-  m_LocalScale: {x: 2, y: 1.3000034, z: 4.0000205}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4958331742956082}
   m_Father: {fileID: 0}
