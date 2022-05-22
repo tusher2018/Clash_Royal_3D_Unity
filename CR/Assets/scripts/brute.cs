@@ -11,6 +11,8 @@ public class brute : NetworkBehaviour
 
     NavMeshAgent navAgent;
     public GameObject wephone;
+    public GameObject EffectORAnyObject;
+
 
     private bool walking = false;
     [SerializeField] public Transform targetedEnemy;
@@ -145,6 +147,15 @@ public class brute : NetworkBehaviour
     public void colliderClose()
     {
       if(wephone!=null)  wephone.GetComponent<Collider>().enabled = false;
+    }
+        
+    public void ObjectOpen()
+    {
+      if(EffectORAnyObject!=null)  EffectORAnyObject.SetActive(true);
+    }
+    public void ObjectClose()
+    {
+      if(EffectORAnyObject!=null)  EffectORAnyObject.SetActive(false);
     }
 
 

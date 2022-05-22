@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114070994410335156}
   - component: {fileID: 114669125964695798}
   - component: {fileID: 114226214806158172}
+  - component: {fileID: 64750920508588902}
   m_Layer: 0
   m_Name: rock1
   m_TagString: Untagged
@@ -67,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1107186037078722}
   m_LocalRotation: {x: 0.000000081460335, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -314.5212, y: 597.6439, z: 366.2887}
+  m_LocalPosition: {x: -340.53726, y: 601.32, z: 371.64148}
   m_LocalScale: {x: 45, y: 40, z: 50}
   m_Children:
   - {fileID: 4234754482653180}
@@ -128,6 +129,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &64750920508588902
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1107186037078722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: a1a4bcf17354e5e4fb377a5c8ed8b0c9, type: 3}
 --- !u!114 &114070994410335156
 MonoBehaviour:
   m_ObjectHideFlags: 1

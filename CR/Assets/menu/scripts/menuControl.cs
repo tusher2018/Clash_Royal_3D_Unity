@@ -9,6 +9,7 @@ public class menuControl : MonoBehaviour
 
     [SerializeField] public GameObject[] myDeck;
     [SerializeField] public GameObject holdingobject;
+    [SerializeField] public Sprite notHolldingimage;
 
 
     // Use this for initialization
@@ -20,7 +21,7 @@ public class menuControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (holdingobject.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite == null)
+        if (holdingobject.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite == notHolldingimage)
         {
             foreach (GameObject item in myDeck)
             {
@@ -38,14 +39,14 @@ public class menuControl : MonoBehaviour
 
     public void makeHoldingNull()
     {
-        holdingobject.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = null;
+        holdingobject.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =  notHolldingimage;
         holdingobject.transform.GetChild(0).GetChild(0).GetComponent<TroopInDeck>().DeckTroop = null;
     }
 
     public void MyDeckClick(GameObject Deck)
     {
         DeckExit();
-        if (holdingobject.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite == null)
+        if (holdingobject.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite ==  notHolldingimage)
         {
             Deck.transform.GetChild(1).gameObject.SetActive(true);
             Deck.transform.GetComponent<Image>().transform.localScale = new Vector3(0.13f, 0.88f, 1f);
@@ -54,7 +55,7 @@ public class menuControl : MonoBehaviour
         {
             Deck.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =
             holdingobject.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-            holdingobject.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = null;
+            holdingobject.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =  notHolldingimage;
 
             Deck.transform.GetChild(0).GetChild(0).GetComponent<TroopInDeck>().DeckTroop =
             holdingobject.transform.GetChild(0).GetChild(0).GetComponent<TroopInDeck>().DeckTroop;

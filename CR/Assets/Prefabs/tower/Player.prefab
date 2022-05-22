@@ -416,5 +416,5 @@ MonoBehaviour:
     type: 2}
   LeftTowerPos: {fileID: 1240930473664250}
   RightTowerPos: {fileID: 1696914462671114}
-  Troop: {fileID: 1543976211674746, guid: 2e414f50b789c484182cd60405dd22ee, type: 2}
+  Troop: {fileID: 1826793362248814, guid: 20744e28bd259274abea4ed7e99d95a7, type: 2}
   BlueTeam: 0

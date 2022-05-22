@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114960271413331772}
   - component: {fileID: 114819243025499440}
   - component: {fileID: 114708643095701820}
+  - component: {fileID: 65879914312093662}
   m_Layer: 0
   m_Name: rock5
   m_TagString: Untagged
@@ -67,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1656783129661140}
   m_LocalRotation: {x: 0.000000081460335, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -315.25372, y: 597.6439, z: 369.46777}
+  m_LocalPosition: {x: -329.127, y: 605.03625, z: 379.50992}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children:
   - {fileID: 4141804275807338}
@@ -128,6 +129,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65879914312093662
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656783129661140}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04, y: 0.05, z: 0.04}
+  m_Center: {x: 0, y: 0.04, z: 0.03}
 --- !u!114 &114708643095701820
 MonoBehaviour:
   m_ObjectHideFlags: 1
