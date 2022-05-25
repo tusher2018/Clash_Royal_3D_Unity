@@ -10,6 +10,7 @@ public class NetworkSpwan : NetworkManager
     [SerializeField] Transform Pos1;
     [SerializeField] Transform Pos2;
     GameObject ball;
+[SerializeField] public  GameObject[] Players;
 
 
 
@@ -18,10 +19,10 @@ public class NetworkSpwan : NetworkManager
     {
         // add player at correct spawn position
         Transform start = numPlayers == 0 ? Pos1 : Pos2;
-
-        GameObject player = Instantiate(playerPrefab, start.position, start.rotation);
-        NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+        GameObject player = Instantiate(playerPrefab, start.position, start.rotation); 
         
+        NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);         
+        Players[numPlayers-1]=player;
         // if (numPlayers == 2)
         // {
             

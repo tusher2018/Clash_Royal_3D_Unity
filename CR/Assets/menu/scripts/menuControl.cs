@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class menuControl : MonoBehaviour
@@ -12,13 +13,13 @@ public class menuControl : MonoBehaviour
     [SerializeField] public Sprite notHolldingimage;
 
 
-    // Use this for initialization
+  
     void Start()
     {
-        //myDeck = GameObject.FindGameObjectsWithTag("MyDeck");
+    
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (holdingobject.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite == notHolldingimage)
@@ -68,14 +69,14 @@ public class menuControl : MonoBehaviour
     {
         DeckExit();
         Deck.transform.GetChild(1).gameObject.SetActive(true);
-        Deck.transform.GetComponent<Image>().transform.localScale = new Vector3(1f, 1.2f, 1f);
+        Deck.transform.GetComponent<Image>().transform.localScale = new Vector3(0.125f, 0.24f, 1f);
     }
 
     public void DeckExit()
     {
         foreach (GameObject item in GameObject.FindGameObjectsWithTag("UnLockDeck"))
         {
-            item.transform.GetComponent<Image>().transform.localScale = new Vector3(.88f, 1.11f, 1f);
+            item.transform.GetComponent<Image>().transform.localScale = new Vector3(0.125f, 0.224f, 1f);
             item.transform.GetChild(1).gameObject.SetActive(false);
         }
         foreach (GameObject item in GameObject.FindGameObjectsWithTag("MyDeck"))
@@ -120,6 +121,11 @@ public class menuControl : MonoBehaviour
             DeckExit();
         }
     }
+
+
+
+
+
 
 
 }

@@ -9,11 +9,12 @@ public class subTower : NetworkBehaviour
     [SerializeField] bool LeftTower;
     [SerializeField] bool RightTower;
     [SerializeField] bool MiddleTower;
+    [SerializeField] string TagMe="Base";
    
    void Start()
    {
        if (!hasAuthority) return;
-       transform.tag="Base";
+       transform.tag=TagMe;
    }
    
     void Update()

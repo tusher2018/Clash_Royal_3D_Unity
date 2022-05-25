@@ -58,6 +58,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1376701885635628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4833416812080040}
+  m_Layer: 0
+  m_Name: BoardPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1552472071254732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4673846685565982}
+  m_Layer: 0
+  m_Name: middel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1596262616863342
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +180,19 @@ Transform:
   m_Father: {fileID: 4990303292498208}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4673846685565982
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1552472071254732}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4990303292498208}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4822499537370160
 Transform:
   m_ObjectHideFlags: 1
@@ -176,24 +219,39 @@ Transform:
   m_Father: {fileID: 4990303292498208}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!4 &4833416812080040
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1376701885635628}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: -0.5}
+  m_LocalPosition: {x: -0.1913, y: 0.09993793, z: -0.0027272236}
+  m_LocalScale: {x: 0.0015723439, y: 0.034178175, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4990303292498208}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4990303292498208
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868111252446176}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: -301.1, y: 505.2, z: 110.6}
-  m_LocalScale: {x: 1292.8018, y: 1292.8022, z: 990}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: -0.5}
+  m_LocalPosition: {x: -289.3, y: 620.6, z: 446.5}
+  m_LocalScale: {x: 990, y: 1292.8022, z: 990}
   m_Children:
   - {fileID: 4596209355020706}
   - {fileID: 4822743990460172}
   - {fileID: 4039559425096650}
   - {fileID: 4822499537370160}
   - {fileID: 4142665864776840}
+  - {fileID: 4833416812080040}
+  - {fileID: 4673846685565982}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 180}
 --- !u!23 &23149289544707918
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -416,5 +474,7 @@ MonoBehaviour:
     type: 2}
   LeftTowerPos: {fileID: 1240930473664250}
   RightTowerPos: {fileID: 1696914462671114}
+  Board: {fileID: 1533775177109238, guid: 570cbb2390f3ee847a96505d4c02f12e, type: 2}
+  BoardPoint: {fileID: 1376701885635628}
   Troop: {fileID: 1826793362248814, guid: 20744e28bd259274abea4ed7e99d95a7, type: 2}
   BlueTeam: 0

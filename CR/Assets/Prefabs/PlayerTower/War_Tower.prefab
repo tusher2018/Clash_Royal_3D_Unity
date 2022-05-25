@@ -341,6 +341,7 @@ MonoBehaviour:
   LeftTower: 0
   RightTower: 0
   MiddleTower: 0
+  TagMe: Base
 --- !u!114 &114459343372113690
 MonoBehaviour:
   m_ObjectHideFlags: 1
