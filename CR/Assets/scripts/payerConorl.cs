@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System.Runtime.CompilerServices;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
+
 public class payerConorl : NetworkBehaviour
 {
-    [SerializeField] GameObject[] AllPrefeb;
+    [SerializeField] Vector3 CameraPos1;
+    [SerializeField] Vector3 CameraPos2;
 
     [SerializeField] GameObject TowerPrefebs;
     [SerializeField] GameObject LeftTowerPos;
@@ -15,12 +18,9 @@ public class payerConorl : NetworkBehaviour
     GameObject Lefttower;
     GameObject Righttower;
     GameObject middletower;
-    [SyncVar(hook = "OnScoreChanged")] public int score = 0;
+    [SyncVar] public int score = 3;
     [SerializeField] TextMesh ScoreText;
-
-    [SerializeField] GameObject canvas;
     [SerializeField] public GameObject board;
-
     Ray ray;
     GameObject myTroop;
     bool exitroad = true;
@@ -29,24 +29,14 @@ public class payerConorl : NetworkBehaviour
     RaycastHit hit;
     [SyncVar] public bool BlueTeam = false;
     bool calledtower = false;
-
     [SerializeField] float BoardRotationX;
     [SerializeField] float BoardRotationY;
     [SerializeField] float BoardRotationZ;
-    [SerializeField] float VSBoardRotationX;
-    [SerializeField] float VSBoardRotationY;
-    [SerializeField] float VSBoardRotationZ;
-    // [SerializeField] float VSBoardRotationX_Score;
-    // [SerializeField] float VSBoardRotationY_Score;
-    // [SerializeField] float VSBoardRotationZ_Score;
+
+    [SerializeField] GameObject resultBoard;
+    bool GameEnd = false;
 
 
-
-    // [Header("End Game")]
-    // [SerializeField] public GameObject endpoint;
-    [SerializeField] public GameObject VSBoard;
-
-    [SyncVar] public bool EndGame = false;
 
     public override void OnStartLocalPlayer()
     {
@@ -59,33 +49,13 @@ public class payerConorl : NetworkBehaviour
         if (board.transform.eulerAngles.z <= 180f) { BoardRotationZ = board.transform.localEulerAngles.z; } else { BoardRotationZ = board.transform.localEulerAngles.z - 360f; }
         BoardRotationX += 180;
         board.transform.localRotation = Quaternion.Euler(BoardRotationX, BoardRotationY, BoardRotationZ);
-
-        // if (VSBoard.transform.eulerAngles.x <= 180f) { VSBoardRotationX = VSBoard.transform.localEulerAngles.x; } else { VSBoardRotationX = VSBoard.transform.localEulerAngles.x - 360f; }
-        // if (VSBoard.transform.eulerAngles.y <= 180f) { VSBoardRotationY = VSBoard.transform.localEulerAngles.y; } else { VSBoardRotationY = VSBoard.transform.localEulerAngles.y - 360f; }
-        // if (VSBoard.transform.eulerAngles.z <= 180f) { VSBoardRotationZ = VSBoard.transform.localEulerAngles.z; } else { VSBoardRotationZ = VSBoard.transform.localEulerAngles.z - 360f; }
-        // VSBoardRotationX += 180;
-        // VSBoard.transform.localRotation = Quaternion.Euler(VSBoardRotationX, VSBoardRotationY, VSBoardRotationZ);
-
-        // for (int i = 0; i < 3; i++){
-        //      if (VSBoard.transform.GetChild(i).eulerAngles.x <= 180f) { VSBoardRotationX_Score = VSBoard.transform.GetChild(i).localEulerAngles.x; } else { VSBoardRotationX_Score = VSBoard.transform.GetChild(i).localEulerAngles.x - 360f; }
-        //         if (VSBoard.transform.GetChild(i).eulerAngles.y <= 180f) { VSBoardRotationY_Score = VSBoard.transform.GetChild(i).localEulerAngles.y; } else { VSBoardRotationY_Score = VSBoard.transform.GetChild(i).localEulerAngles.y - 360f; }
-        //         if (VSBoard.transform.GetChild(i).eulerAngles.z <= 180f) { VSBoardRotationZ_Score = VSBoard.transform.GetChild(i).localEulerAngles.z; } else { VSBoardRotationZ_Score = VSBoard.transform.GetChild(i).localEulerAngles.z - 360f; }
-        //         VSBoardRotationY_Score += 180;
-        //         VSBoard.transform.GetChild(i).localRotation = Quaternion.Euler(VSBoardRotationX_Score, VSBoardRotationY_Score, VSBoardRotationZ_Score);
-        // }
-
-
-
-        canvas = GameObject.FindGameObjectWithTag("Canvas");
-
     }
 
 
 
     void Start()
     {
-        // canvas.SetActive(false);
-        // network = GameObject.Find("Network").GetComponent<NetworkSpwan>();
+
     }
 
     void Update()
@@ -97,15 +67,27 @@ public class payerConorl : NetworkBehaviour
         }
         else
         {
-            BlueTeam = false; tag = "RedPlayerBase";
+            BlueTeam = false;
+            tag = "RedPlayerBase";
         }
 
-  
+
 
 
         if (!isLocalPlayer) return;
 
+        if (BlueTeam)
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").transform.position = CameraPos1;
+            GameObject.FindGameObjectWithTag("MainCamera").transform.localRotation = Quaternion.Euler(37, 180, 0);
 
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").transform.position = CameraPos2;
+            GameObject.FindGameObjectWithTag("MainCamera").transform.localRotation = Quaternion.Euler(37, 0, 0); ;
+
+        }
 
 
         if (!calledtower)
@@ -120,31 +102,15 @@ public class payerConorl : NetworkBehaviour
 
         }
 
-        if (score != GameObject.FindGameObjectsWithTag("Base").Length)
+
+
+        if (score == 0 && GameEnd == false)
         {
-            CmdScore(Mathf.Abs(GameObject.FindGameObjectsWithTag("Base").Length-3));
+            CmdResult();
+            GameEnd = true;
         }
 
 
-        // call Game End
-        // if (score == 0)
-        // {
-        //     CmdEndGame(true);
-        // }
-
-        // if (transform.tag == "BluePlayerBase")
-        // {if(GameObject.FindGameObjectWithTag("RedPlayerBase")!=null)
-        //     if (GameObject.FindGameObjectWithTag("RedPlayerBase").GetComponent<payerConorl>().EndGame == true) { this.EndGame = true; }
-        // }
-        //   if (transform.tag == "RedPlayerBase")
-        // {if(GameObject.FindGameObjectWithTag("BluePlayerBase")!=null)
-        //     if (GameObject.FindGameObjectWithTag("BluePlayerBase").GetComponent<payerConorl>().EndGame == true) { this.EndGame = true; }
-        // }
-
-        // if (EndGame)
-        // {
-        //     CmdResult();
-        // }
 
 
 
@@ -212,77 +178,33 @@ public class payerConorl : NetworkBehaviour
     }
 
 
+    // void OnScoreChanged(int updatedHealth)
+    // {
+    //     ScoreText.text = updatedHealth.ToString();
+    // }
 
-    //     [Command]
-    //     public void CmdGameWon()
-    //     {
-    //         RpcGameEnd(this.netId);
-    //     }
 
-    [ClientRpc]
-    public void RpcGameEnd(NetworkInstanceId nid)
+    [Command]
+    public void CmdResult()
     {
-        GameObject bluePlayer = GameObject.FindGameObjectWithTag("BluePlayerBase");
-        GameObject redPlayer = GameObject.FindGameObjectWithTag("RedPlayerBase");
-        if (isLocalPlayer)
+        GameObject[] allPlayer = GameObject.Find("Network").GetComponent<NetworkSpwan>().Players;
+        GameObject resultboard = Instantiate(resultBoard, Vector3.zero, Quaternion.identity);
+        resultboard.transform.GetComponent<resultBoard>().p1s = allPlayer[0].GetComponent<payerConorl>().score.ToString();
+        resultboard.transform.GetComponent<resultBoard>().p2s = allPlayer[1].GetComponent<payerConorl>().score.ToString();
+        resultboard.transform.GetComponent<resultBoard>().p1n = allPlayer[0].GetComponent<payerConorl>().netId.ToString();
+        resultboard.transform.GetComponent<resultBoard>().p2n = allPlayer[1].GetComponent<payerConorl>().netId.ToString();
+        NetworkServer.SpawnWithClientAuthority(resultboard, connectionToClient);
+        foreach (NetworkTransform item in GameObject.FindObjectsOfType<NetworkTransform>())
         {
-
-            if (this.netId == nid)
+            if (item.gameObject.GetComponent<HealthControler>() != null)
             {
-
-
-            }
-            else
-            {
-                //Process win here
-
+                item.gameObject.GetComponent<HealthControler>().health -= 100;
+               
             }
         }
-    }
-
-
-
-    [Command]
-    void CmdScore(int scorePoint)
-    {
-        score = scorePoint;
-        ScoreText.text = scorePoint.ToString();
-    }
-
-    void OnScoreChanged(int updatedHealth)
-    {
-        ScoreText.text = updatedHealth.ToString();
-    }
-
-
-
-    [Command]
-    void CmdEndGame(bool end)
-    {
-        // RpcGameEnd(this.netId);
-        this.EndGame = end;
-    }
-    [Command]
-    void CmdResult()
-    {
-        // VSBoard.SetActive(true);
-        // var foundCanvasObjects = FindObjectsOfType<HealthControler>();
-        // foreach (var item in foundCanvasObjects)
-        // {
-        //     item.GetComponent<HealthControler>().health = 0;
-        // }
-        // VSBoard.transform.GetChild(0).GetComponent<Text>().text=score.ToString();
-
-        // if (transform.tag == "BluePlayerBase")
-        // {if(GameObject.FindGameObjectWithTag("RedPlayerBase")!=null)
-        //    VSBoard.transform.GetChild(1).GetComponent<Text>().text=  GameObject.FindGameObjectWithTag("RedPlayerBase").GetComponent<payerConorl>().score.ToString();
-        // }
-        //   if (transform.tag == "RedPlayerBase")
-        // {if(GameObject.FindGameObjectWithTag("BluePlayerBase")!=null)
-        //    VSBoard.transform.GetChild(1).GetComponent<Text>().text=  GameObject.FindGameObjectWithTag("BluePlayerBase").GetComponent<payerConorl>().score.ToString();
-        // }
 
     }
+
 
 
 

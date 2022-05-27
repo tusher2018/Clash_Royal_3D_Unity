@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraContorl : MonoBehaviour {
 
-[SerializeField] float nearPoint;
-[SerializeField] float farPoint;
+// [SerializeField] float nearPoint;
+// [SerializeField] float farPoint;
 
 Vector3 Vec;
 [SerializeField] float speed;
@@ -19,7 +19,7 @@ Vector3 Vec;
 	void Update () {
 	    Vec = transform.localPosition;
        
-       Vec.x -= Input.GetAxis("Vertical") * Time.deltaTime * speed;
+       Vec.z -= Input.GetAxis("Vertical") * Time.deltaTime * speed;
         transform.localPosition = Vec;
 	}
 }

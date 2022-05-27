@@ -31,6 +31,10 @@ public class HealthControler : NetworkBehaviour
     [Command]
     void CmdDestroy()
     {
+        if(transform.GetComponent<subTower>()!=null){
+            if(BlueTeam){GameObject.FindGameObjectWithTag("BluePlayerBase").GetComponent<payerConorl>().score-=1;}
+            if(!BlueTeam){GameObject.FindGameObjectWithTag("RedPlayerBase").GetComponent<payerConorl>().score-=1;}
+        }
         NetworkServer.Spawn(Instantiate(effect, effectPos.position, effectPos.rotation));
         Destroy(transform.GetComponent<NetworkTransform>());
         NetworkServer.Destroy(transform.gameObject);
