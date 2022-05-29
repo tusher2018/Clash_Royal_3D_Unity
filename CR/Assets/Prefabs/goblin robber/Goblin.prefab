@@ -948,7 +948,7 @@ GameObject:
   - component: {fileID: 195593366547304924}
   - component: {fileID: 114931693048028324}
   m_Layer: 0
-  m_Name: Goblin_rouge_r
+  m_Name: Goblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2510,6 +2510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wephone: {fileID: 0}
+  EffectORAnyObject: {fileID: 0}
   targetedEnemy: {fileID: 0}
   isAttacking: 0
   AttackDistance: 10

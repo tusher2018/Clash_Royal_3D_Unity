@@ -2,21 +2,20 @@
 using UnityEngine.AI;
 using UnityEngine.Networking;
 
-
-public class SKELETON : NetworkBehaviour
+public class Archer : NetworkBehaviour
 {
 
-    [SerializeField] GameObject Fireball;
-    [SerializeField] Transform firePoint;
-	
+    [SerializeField] GameObject Arow;
+    [SerializeField] Transform ArowPoint;
     NavMeshAgent navAgent;
-
+    [SerializeField] GameObject Bow;
+    [SerializeField] GameObject eye;
     private bool walking = false;
     [SerializeField] public Transform targetedEnemy;
     private bool isAttacking = false;
     [SerializeField] private float shootDistance = 10f;
     private float nextFire;
-    [SerializeField] private float timeBetweenShots = 2f;
+    private float timeBetweenShots = 2f;
     private Animator anim;
     float bulletLifeTime = 5f;
     [SerializeField] float bulletSpeed = 4f;
@@ -24,20 +23,20 @@ public class SKELETON : NetworkBehaviour
 
 
 
-    // Use this for initialization
+ 
     void Start()
     {
         if (!hasAuthority) return;
 
         tag = "Player";
-        name = "Myskeleton";
+        name = "MyArcher";
         anim = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
 
 
     }
 
-    // Update is called once per frame
+ 
     void FixedUpdate()
     {
         if (hasAuthority)
@@ -95,7 +94,7 @@ public class SKELETON : NetworkBehaviour
                                 {
                                     isAttacking = true;
                                     CmdAttackAnimation();
-                                    
+                                    // CmdBowCreat99();
                                     nextFire = Time.time + timeBetweenShots;
                                     targetedEnemy = null;
                                 }
@@ -121,13 +120,13 @@ public class SKELETON : NetworkBehaviour
     }
 
 
-    float ArrowPointRotationX;
-    float ArrowPointRotationY;
-    float ArrowPointRotationZ;
+    [SerializeField] float ArrowPointRotationX;
+    [SerializeField] float ArrowPointRotationY;
+    [SerializeField] float ArrowPointRotationZ;
 
-    float PlayerRotationX;
-    float PlayerRotationY;
-    float PlayerRotationZ;
+    [SerializeField] float PlayerRotationX;
+    [SerializeField] float PlayerRotationY;
+    [SerializeField] float PlayerRotationZ;
 
     void CmdAttackAnimation()
     {
@@ -136,11 +135,11 @@ public class SKELETON : NetworkBehaviour
 
         ArrowPointRotationX = ArrowPointRotationX * (-1);
 
-        if (transform.localRotation.eulerAngles.y <= 180f) { ArrowPointRotationY = firePoint.localRotation.eulerAngles.y; } else { ArrowPointRotationY = firePoint.localRotation.eulerAngles.y - 360f; }
+        if (transform.localRotation.eulerAngles.y <= 180f) { ArrowPointRotationY = ArowPoint.localRotation.eulerAngles.y; } else { ArrowPointRotationY = ArowPoint.localRotation.eulerAngles.y - 360f; }
 
-        if (transform.localRotation.eulerAngles.z <= 180f) { ArrowPointRotationZ = firePoint.localRotation.eulerAngles.z; } else { ArrowPointRotationZ = firePoint.localRotation.eulerAngles.z - 360f; }
+        if (transform.localRotation.eulerAngles.z <= 180f) { ArrowPointRotationZ = ArowPoint.localRotation.eulerAngles.z; } else { ArrowPointRotationZ = ArowPoint.localRotation.eulerAngles.z - 360f; }
 
-        firePoint.localRotation = Quaternion.Euler(ArrowPointRotationX, ArrowPointRotationY, ArrowPointRotationZ);
+        ArowPoint.localRotation = Quaternion.Euler(ArrowPointRotationX, ArrowPointRotationY, ArrowPointRotationZ);
 
 
         anim.SetTrigger("Attack");
@@ -150,12 +149,11 @@ public class SKELETON : NetworkBehaviour
     [Command]
     void CmdBowCreat99()
     {
-
-        GameObject bullet = Instantiate(Fireball, firePoint.position, firePoint.rotation);
+        GameObject bullet = Instantiate(Arow, ArowPoint.position, ArowPoint.rotation);
         bullet.transform.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
         if (transform.GetComponent<HealthControler>().BlueTeam) { bullet.tag = "BlueFire"; }
         if (!transform.GetComponent<HealthControler>().BlueTeam) { bullet.tag = "RedFire"; }
-        NetworkServer.SpawnWithClientAuthority(bullet, GameObject.FindGameObjectWithTag("PlayerBase"));
+        NetworkServer.Spawn(bullet);
 
 
     }
@@ -167,7 +165,22 @@ public class SKELETON : NetworkBehaviour
 
     public void CmdBowCreat()
     {
-            if(hasAuthority){CmdBowCreat99();}
+        if (hasAuthority) { CmdBowCreat99(); }
+    }
+
+
+
+
+
+
+    public void CmdropeAttack()
+    {
+        Bow.GetComponent<Animator>().PlayInFixedTime("rope Attack");
+    }
+
+    public void CallRotatiion()
+    {
+ 
     }
 
 

@@ -1,42 +1,50 @@
 ﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.AI;
 using UnityEngine.Networking;
 
-public class Archer : NetworkBehaviour
-{
 
-    [SerializeField] GameObject Arow;
-    [SerializeField] Transform ArowPoint;
+public class earthBender :  NetworkBehaviour {
+
+    // [SerializeField] GameObject Fireball;
+    [SerializeField] GameObject[] rock;
+
+    [SerializeField] Material[] matarials;
+
+
+
+    [SerializeField] Transform firePoint;
     NavMeshAgent navAgent;
-    [SerializeField] GameObject Bow;
-    [SerializeField] GameObject eye;
+
     private bool walking = false;
     [SerializeField] public Transform targetedEnemy;
     private bool isAttacking = false;
     [SerializeField] private float shootDistance = 10f;
     private float nextFire;
-    private float timeBetweenShots = 2f;
+    [SerializeField] private float timeBetweenShots = 2f;
     private Animator anim;
     float bulletLifeTime = 5f;
-    [SerializeField] float bulletSpeed = 4f;
+    [SerializeField] float bulletSpeed = 50f;
+	[SerializeField] float corutineTime=1f;
+	[SerializeField] float HipsY=0;
 
 
 
 
- 
+    // Use this for initialization
     void Start()
     {
         if (!hasAuthority) return;
 
         tag = "Player";
-        name = "MyArcher";
+        name = "Myskeleton";
         anim = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
 
 
     }
 
- 
+    // Update is called once per frame
     void FixedUpdate()
     {
         if (hasAuthority)
@@ -88,13 +96,15 @@ public class Archer : NetworkBehaviour
                                 if (transform.eulerAngles.y <= 180f) { PlayerRotationY = transform.eulerAngles.y; } else { PlayerRotationY = transform.eulerAngles.y - 360f; }
                                 if (transform.eulerAngles.z <= 180f) { PlayerRotationZ = transform.eulerAngles.z; } else { PlayerRotationZ = transform.eulerAngles.z - 360f; }
                                 PlayerRotationX = 0f;
+								PlayerRotationY=PlayerRotationY+HipsY;
                                 transform.localRotation = Quaternion.Euler(PlayerRotationX, PlayerRotationY, PlayerRotationZ);
 
                                 if (Time.time > nextFire)
                                 {
+                                
                                     isAttacking = true;
                                     CmdAttackAnimation();
-                                    // CmdBowCreat99();
+                                    
                                     nextFire = Time.time + timeBetweenShots;
                                     targetedEnemy = null;
                                 }
@@ -120,13 +130,13 @@ public class Archer : NetworkBehaviour
     }
 
 
-    [SerializeField] float ArrowPointRotationX;
-    [SerializeField] float ArrowPointRotationY;
-    [SerializeField] float ArrowPointRotationZ;
+    float ArrowPointRotationX;
+    float ArrowPointRotationY;
+    float ArrowPointRotationZ;
 
-    [SerializeField] float PlayerRotationX;
-    [SerializeField] float PlayerRotationY;
-    [SerializeField] float PlayerRotationZ;
+    float PlayerRotationX;
+    float PlayerRotationY;
+    float PlayerRotationZ;
 
     void CmdAttackAnimation()
     {
@@ -135,11 +145,11 @@ public class Archer : NetworkBehaviour
 
         ArrowPointRotationX = ArrowPointRotationX * (-1);
 
-        if (transform.localRotation.eulerAngles.y <= 180f) { ArrowPointRotationY = ArowPoint.localRotation.eulerAngles.y; } else { ArrowPointRotationY = ArowPoint.localRotation.eulerAngles.y - 360f; }
+        if (transform.localRotation.eulerAngles.y <= 180f) { ArrowPointRotationY = firePoint.localRotation.eulerAngles.y; } else { ArrowPointRotationY = firePoint.localRotation.eulerAngles.y - 360f; }
 
-        if (transform.localRotation.eulerAngles.z <= 180f) { ArrowPointRotationZ = ArowPoint.localRotation.eulerAngles.z; } else { ArrowPointRotationZ = ArowPoint.localRotation.eulerAngles.z - 360f; }
+        if (transform.localRotation.eulerAngles.z <= 180f) { ArrowPointRotationZ = firePoint.localRotation.eulerAngles.z; } else { ArrowPointRotationZ = firePoint.localRotation.eulerAngles.z - 360f; }
 
-        ArowPoint.localRotation = Quaternion.Euler(ArrowPointRotationX, ArrowPointRotationY, ArrowPointRotationZ);
+        firePoint.localRotation = Quaternion.Euler(ArrowPointRotationX, ArrowPointRotationY, ArrowPointRotationZ);
 
 
         anim.SetTrigger("Attack");
@@ -149,11 +159,13 @@ public class Archer : NetworkBehaviour
     [Command]
     void CmdBowCreat99()
     {
-        GameObject bullet = Instantiate(Arow, ArowPoint.position, ArowPoint.rotation);
-        bullet.transform.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
-        if (transform.GetComponent<HealthControler>().BlueTeam) { bullet.tag = "BlueFire"; }
+
+        GameObject bullet = Instantiate(rock[Random.Range(0, rock.Length)], firePoint.position, firePoint.rotation);
+        bullet.transform.GetChild(0).GetComponent<Renderer>().material=matarials[Random.Range(0,matarials.Length)];
+        StartCoroutine(RockMovementCoroutine(bullet));
+		if (transform.GetComponent<HealthControler>().BlueTeam) { bullet.tag = "BlueFire"; }
         if (!transform.GetComponent<HealthControler>().BlueTeam) { bullet.tag = "RedFire"; }
-        NetworkServer.SpawnWithClientAuthority(bullet, GameObject.FindGameObjectWithTag("PlayerBase"));
+        NetworkServer.Spawn(bullet);
 
 
     }
@@ -165,22 +177,7 @@ public class Archer : NetworkBehaviour
 
     public void CmdBowCreat()
     {
-        if (hasAuthority) { CmdBowCreat99(); }
-    }
-
-
-
-
-
-
-    public void CmdropeAttack()
-    {
-        Bow.GetComponent<Animator>().PlayInFixedTime("rope Attack");
-    }
-
-    public void CallRotatiion()
-    {
- 
+        if(hasAuthority){CmdBowCreat99();}
     }
 
 
@@ -204,5 +201,11 @@ public class Archer : NetworkBehaviour
         }
         return tMin;
     }
+
+	IEnumerator RockMovementCoroutine(GameObject bullet){
+		yield return bullet.transform.GetComponent<Rigidbody>().velocity = bullet.transform.up * bulletSpeed;
+		yield return new WaitForSeconds(corutineTime);
+		yield return bullet.transform.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed*3;
+	}
 
 }

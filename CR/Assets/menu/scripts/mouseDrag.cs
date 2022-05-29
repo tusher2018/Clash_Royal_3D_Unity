@@ -107,18 +107,18 @@ public class mouseDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndD
                     RightRectTransform.anchoredPosition = RightMenuStartPos;
                 }
         }
-		
-		if (leftDrag)
-        {
-            if (LastLeft){transform.GetComponent<RectTransform>().anchoredPosition=startPos;}                             
-        }
-		if (rightDrag)
-        {
-            if (LastRight){transform.GetComponent<RectTransform>().anchoredPosition=startPos;}                             
-        }
-		
 
-		
+        if (leftDrag)
+        {
+            if (LastLeft) { transform.GetComponent<RectTransform>().anchoredPosition = startPos; }
+        }
+        if (rightDrag)
+        {
+            if (LastRight) { transform.GetComponent<RectTransform>().anchoredPosition = startPos; }
+        }
+
+
+
         leftDrag = false;
         rightDrag = false;
 

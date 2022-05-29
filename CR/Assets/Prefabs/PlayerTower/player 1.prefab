@@ -441,3 +441,5 @@ MonoBehaviour:
   BoardRotationZ: 0
   resultBoard: {fileID: 1494176644221634, guid: 95d196b8ae554c84a856ce597a5c7bb9,
     type: 2}
+  elixir: 5
+  elixirSpeed: 0.035

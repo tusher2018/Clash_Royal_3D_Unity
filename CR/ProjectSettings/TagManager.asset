@@ -17,6 +17,9 @@ TagManager:
   - BluePlayerBase
   - RedPlayerBase
   - Canvas
+  - ElixirBar
+  - TransferDeck
+  - DeckProvider
   layers:
   - Default
   - TransparentFX

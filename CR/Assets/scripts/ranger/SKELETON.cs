@@ -1,19 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.AI;
 using UnityEngine.Networking;
 
 
-public class earthBender :  NetworkBehaviour {
+public class SKELETON : NetworkBehaviour
+{
 
-    // [SerializeField] GameObject Fireball;
-    [SerializeField] GameObject[] rock;
-
-    [SerializeField] Material[] matarials;
-
-
-
+    [SerializeField] GameObject Fireball;
     [SerializeField] Transform firePoint;
+	
     NavMeshAgent navAgent;
 
     private bool walking = false;
@@ -24,9 +19,7 @@ public class earthBender :  NetworkBehaviour {
     [SerializeField] private float timeBetweenShots = 2f;
     private Animator anim;
     float bulletLifeTime = 5f;
-    [SerializeField] float bulletSpeed = 50f;
-	[SerializeField] float corutineTime=1f;
-	[SerializeField] float HipsY=0;
+    [SerializeField] float bulletSpeed = 4f;
 
 
 
@@ -96,12 +89,10 @@ public class earthBender :  NetworkBehaviour {
                                 if (transform.eulerAngles.y <= 180f) { PlayerRotationY = transform.eulerAngles.y; } else { PlayerRotationY = transform.eulerAngles.y - 360f; }
                                 if (transform.eulerAngles.z <= 180f) { PlayerRotationZ = transform.eulerAngles.z; } else { PlayerRotationZ = transform.eulerAngles.z - 360f; }
                                 PlayerRotationX = 0f;
-								PlayerRotationY=PlayerRotationY+HipsY;
                                 transform.localRotation = Quaternion.Euler(PlayerRotationX, PlayerRotationY, PlayerRotationZ);
 
                                 if (Time.time > nextFire)
                                 {
-                                
                                     isAttacking = true;
                                     CmdAttackAnimation();
                                     
@@ -160,12 +151,11 @@ public class earthBender :  NetworkBehaviour {
     void CmdBowCreat99()
     {
 
-        GameObject bullet = Instantiate(rock[Random.Range(0, rock.Length)], firePoint.position, firePoint.rotation);
-        bullet.transform.GetChild(0).GetComponent<Renderer>().material=matarials[Random.Range(0,matarials.Length)];
-        StartCoroutine(ExampleCoroutine(bullet));
-		if (transform.GetComponent<HealthControler>().BlueTeam) { bullet.tag = "BlueFire"; }
+        GameObject bullet = Instantiate(Fireball, firePoint.position, firePoint.rotation);
+        bullet.transform.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
+        if (transform.GetComponent<HealthControler>().BlueTeam) { bullet.tag = "BlueFire"; }
         if (!transform.GetComponent<HealthControler>().BlueTeam) { bullet.tag = "RedFire"; }
-        NetworkServer.SpawnWithClientAuthority(bullet, GameObject.FindGameObjectWithTag("PlayerBase"));
+        NetworkServer.Spawn(bullet);
 
 
     }
@@ -177,7 +167,7 @@ public class earthBender :  NetworkBehaviour {
 
     public void CmdBowCreat()
     {
-        if(hasAuthority){CmdBowCreat99();}
+            if(hasAuthority){CmdBowCreat99();}
     }
 
 
@@ -201,11 +191,5 @@ public class earthBender :  NetworkBehaviour {
         }
         return tMin;
     }
-
-	IEnumerator ExampleCoroutine(GameObject bullet){
-		yield return bullet.transform.GetComponent<Rigidbody>().velocity = bullet.transform.up * bulletSpeed;
-		yield return new WaitForSeconds(corutineTime);
-		yield return bullet.transform.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed*3;
-	}
 
 }

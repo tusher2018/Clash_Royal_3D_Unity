@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.AI;
 
 
 public class payerConorl : NetworkBehaviour
 {
     [SerializeField] Vector3 CameraPos1;
     [SerializeField] Vector3 CameraPos2;
-
     [SerializeField] GameObject TowerPrefebs;
     [SerializeField] GameObject LeftTowerPos;
     [SerializeField] GameObject RightTowerPos;
@@ -25,7 +25,10 @@ public class payerConorl : NetworkBehaviour
     GameObject myTroop;
     bool exitroad = true;
     GameObject road = null;
-    [SerializeField] GameObject Troop;
+    public GameObject Troop;
+    public float TroopCost;
+    public GameObject deck;
+    public Image cloneImage;
     RaycastHit hit;
     [SyncVar] public bool BlueTeam = false;
     bool calledtower = false;
@@ -35,15 +38,17 @@ public class payerConorl : NetworkBehaviour
 
     [SerializeField] GameObject resultBoard;
     bool GameEnd = false;
+    [SerializeField] float elixirAmount = 5f;
+    [SerializeField] float elixirSpeed = 0.5f;
+    Image elixirBar;
 
 
 
     public override void OnStartLocalPlayer()
     {
-
         base.OnStartLocalPlayer();
         name = "PlayerBase";
-
+        GameObject.FindGameObjectWithTag("DeckProvider").GetComponent<spriteProviderControll>().player = this.gameObject;
         if (board.transform.eulerAngles.x <= 180f) { BoardRotationX = board.transform.localEulerAngles.x; } else { BoardRotationX = board.transform.localEulerAngles.x - 360f; }
         if (board.transform.eulerAngles.y <= 180f) { BoardRotationY = board.transform.localEulerAngles.y; } else { BoardRotationY = board.transform.localEulerAngles.y - 360f; }
         if (board.transform.eulerAngles.z <= 180f) { BoardRotationZ = board.transform.localEulerAngles.z; } else { BoardRotationZ = board.transform.localEulerAngles.z - 360f; }
@@ -71,9 +76,6 @@ public class payerConorl : NetworkBehaviour
             tag = "RedPlayerBase";
         }
 
-
-
-
         if (!isLocalPlayer) return;
 
         if (BlueTeam)
@@ -89,20 +91,16 @@ public class payerConorl : NetworkBehaviour
 
         }
 
-
         if (!calledtower)
         {
             calledtower = true;
-
             CmdTowerCreat(this.BlueTeam);
             if (Lefttower != null) Lefttower.tag = "Base";
             if (Righttower != null) Righttower.tag = "Base";
             if (middletower != null) middletower.tag = "Base";
-
-
         }
 
-
+        OnLocalScoreChanged(score);
 
         if (score == 0 && GameEnd == false)
         {
@@ -110,31 +108,53 @@ public class payerConorl : NetworkBehaviour
             GameEnd = true;
         }
 
-
-
-
-
-
-
-
-        if (Input.GetMouseButtonDown(0))
+        if (!GameEnd)
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
+            if (elixirAmount <= 10)
             {
-
-                CmdcreatTroop(hit.point);
-
-                if (myTroop != null)
+                elixirAmount += elixirSpeed;
+                if (elixirBar == null) { elixirBar = GameObject.FindGameObjectWithTag("ElixirBar").GetComponent<Image>(); }
+                if (elixirBar != null)
                 {
-                    myTroop.tag = "Player";
-                    myTroop.name = "MyArcher";
+                    elixirBar.fillAmount = elixirAmount / 10;
+                    elixirBar.transform.GetChild(1).GetComponent<Text>().text = ((int)elixirAmount).ToString();
+                }
+            }
 
+            if (Input.GetMouseButtonUp(0) && Troop != null)
+            {
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (elixirAmount > 0 + TroopCost)
+                    {
+                        CmdcreatTroop(hit.point);
+                        elixirAmount -= TroopCost;
+                        if (myTroop != null)
+                        {
+                            myTroop.tag = "Player";
+                            myTroop.name = "MyArcher";
+
+                        }
+                        deck.GetComponent<Image>().sprite = null;
+                        deck.GetComponent<TroopInDeck>().DeckTroop = null;
+                    }
+                    Troop = null;
+                    TroopCost = 0;
+                    cloneImage.sprite = null;
+                    cloneImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 300);
+
+                }
+                else
+                {
+                    Troop = null;
+                    TroopCost = 0;
+                    cloneImage.sprite = null;
+                    cloneImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 300);
                 }
 
             }
-
         }
 
     }
@@ -154,6 +174,7 @@ public class payerConorl : NetworkBehaviour
             {
                 GameObject submytroop = Instantiate(myTroop.GetComponent<subtroopCreat>().subTroopPrefebs, item.position, item.rotation) as GameObject;
                 submytroop.GetComponent<HealthControler>().BlueTeam = this.BlueTeam;
+                submytroop.tag = "Player";
                 NetworkServer.SpawnWithClientAuthority(submytroop, connectionToClient);
             }
 
@@ -178,10 +199,10 @@ public class payerConorl : NetworkBehaviour
     }
 
 
-    // void OnScoreChanged(int updatedHealth)
-    // {
-    //     ScoreText.text = updatedHealth.ToString();
-    // }
+    void OnLocalScoreChanged(int updatedHealth)
+    {
+        ScoreText.text = updatedHealth.ToString();
+    }
 
 
     [Command]
@@ -199,7 +220,12 @@ public class payerConorl : NetworkBehaviour
             if (item.gameObject.GetComponent<HealthControler>() != null)
             {
                 item.gameObject.GetComponent<HealthControler>().health -= 100;
-               
+
+                if (item.transform.GetComponent<NavMeshAgent>() != null)
+                {
+                    item.transform.GetComponent<NavMeshAgent>().Stop();
+                    item.transform.GetComponent<NavMeshAgent>().enabled = false;
+                }
             }
         }
 
