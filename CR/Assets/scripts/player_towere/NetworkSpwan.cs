@@ -23,10 +23,13 @@ public class NetworkSpwan : NetworkManager
         
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);         
         Players[numPlayers-1]=player;
-        // if (numPlayers == 2)
-        // {
+        if (numPlayers == 2)
+        {
             
-        // }
+        }
+        
+
+
     }
     /*  
        public override void OnServerDisconnect(NetworkConnection conn)

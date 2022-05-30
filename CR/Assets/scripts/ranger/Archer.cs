@@ -23,6 +23,8 @@ public class Archer : NetworkBehaviour
 
 
 
+
+
  
     void Start()
     {
@@ -32,7 +34,6 @@ public class Archer : NetworkBehaviour
         name = "MyArcher";
         anim = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
-
 
     }
 
@@ -115,7 +116,7 @@ public class Archer : NetworkBehaviour
                 }
 
             }
-            if (anim != null) { anim.SetBool("IsWalking", walking); }
+            if (anim != null) { anim.SetBool("IsWalking", walking);  }
         }
     }
 
@@ -143,6 +144,7 @@ public class Archer : NetworkBehaviour
 
 
         anim.SetTrigger("Attack");
+       
     }
 
 

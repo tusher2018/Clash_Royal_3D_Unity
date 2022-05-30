@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4039559425096650
 Transform:
   m_ObjectHideFlags: 1
@@ -469,12 +469,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b0baa389403ae448a6c0d3e1dac7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllPrefeb: []
+  CameraPos1: {x: 0, y: 0, z: 0}
+  CameraPos2: {x: 0, y: 0, z: 0}
   TowerPrefebs: {fileID: 1518574521911432, guid: ad4fe5ec0f205ce4783c7deee6e594ca,
     type: 2}
   LeftTowerPos: {fileID: 1240930473664250}
   RightTowerPos: {fileID: 1696914462671114}
-  Board: {fileID: 1533775177109238, guid: 570cbb2390f3ee847a96505d4c02f12e, type: 2}
-  BoardPoint: {fileID: 1376701885635628}
+  middleTowerPos: {fileID: 0}
+  score: 3
+  ScoreText: {fileID: 0}
+  board: {fileID: 0}
   Troop: {fileID: 1826793362248814, guid: 20744e28bd259274abea4ed7e99d95a7, type: 2}
+  TroopCost: 0
+  deck: {fileID: 0}
+  cloneImage: {fileID: 0}
   BlueTeam: 0
+  BoardRotationX: 0
+  BoardRotationY: 0
+  BoardRotationZ: 0
+  resultBoard: {fileID: 0}
+  elixirAmount: 5
+  elixirSpeed: 0.5

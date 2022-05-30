@@ -2484,9 +2484,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wephone: {fileID: 1935484980758618}
+  EffectORAnyObject: {fileID: 0}
   targetedEnemy: {fileID: 0}
   isAttacking: 0
-  AttackDistance: 22
+  AttackDistance: 20
   timeBetweenAttack: 1
 --- !u!114 &114400651244983584
 MonoBehaviour:
