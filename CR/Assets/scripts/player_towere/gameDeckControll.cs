@@ -14,11 +14,20 @@ public class gameDeckControll : MonoBehaviour
 
     void Start()
     {
+        if (transform.root.GetComponent<payerConorl>().BlueTeam){
         myImage = GetComponent<Image>();
-        GameObject[] allSprite=GameObject.FindGameObjectsWithTag("TransferDeck");
+        GameObject[] allSprite=GameObject.FindGameObjectsWithTag("bluecard");
         myImage.sprite=allSprite[num].GetComponent<TroopInDeck>().DeckTroopImage;
         GetComponent<TroopInDeck>().DeckTroop=allSprite[num].GetComponent<TroopInDeck>().DeckTroop;
         GetComponent<TroopInDeck>().Cost=allSprite[num].GetComponent<TroopInDeck>().Cost;
+        }
+        if (!transform.root.GetComponent<payerConorl>().BlueTeam){
+        myImage = GetComponent<Image>();
+        GameObject[] allSprite=GameObject.FindGameObjectsWithTag("redcard");
+        myImage.sprite=allSprite[num].GetComponent<TroopInDeck>().DeckTroopImage;
+        GetComponent<TroopInDeck>().DeckTroop=allSprite[num].GetComponent<TroopInDeck>().DeckTroop;
+        GetComponent<TroopInDeck>().Cost=allSprite[num].GetComponent<TroopInDeck>().Cost;
+        }
 
     }
 

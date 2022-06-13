@@ -2423,6 +2423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wephone: {fileID: 0}
+  EffectORAnyObject: {fileID: 0}
   targetedEnemy: {fileID: 0}
   isAttacking: 0
   AttackDistance: 10

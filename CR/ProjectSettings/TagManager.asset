@@ -20,6 +20,10 @@ TagManager:
   - ElixirBar
   - TransferDeck
   - DeckProvider
+  - gameTimeDeck
+  - Cards
+  - bluecard
+  - redcard
   layers:
   - Default
   - TransparentFX

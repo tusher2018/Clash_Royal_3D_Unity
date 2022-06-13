@@ -1021,7 +1021,7 @@ GameObject:
   - component: {fileID: 195872892185226380}
   m_Layer: 0
   m_Name: wizard
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2551,7 +2551,7 @@ MonoBehaviour:
   EffectORAnyObject: {fileID: 1768612752040956}
   targetedEnemy: {fileID: 0}
   isAttacking: 0
-  AttackDistance: 22
+  AttackDistance: 15
   timeBetweenAttack: 2
 --- !u!114 &114739902627038586
 MonoBehaviour:

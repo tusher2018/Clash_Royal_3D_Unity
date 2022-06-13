@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.AI;
+using System.Linq;
+
 
 
 public class payerConorl : NetworkBehaviour
@@ -25,16 +27,19 @@ public class payerConorl : NetworkBehaviour
     GameObject myTroop;
     bool exitroad = true;
     GameObject road = null;
+
+
     public GameObject Troop;
-    public float TroopCost;
+
+    [SyncVar] public float TroopCost;
     public GameObject deck;
     public Image cloneImage;
     RaycastHit hit;
     [SyncVar] public bool BlueTeam = false;
     bool calledtower = false;
-    [SerializeField] float BoardRotationX;
-    [SerializeField] float BoardRotationY;
-    [SerializeField] float BoardRotationZ;
+    float BoardRotationX;
+    float BoardRotationY;
+    float BoardRotationZ;
 
     [SerializeField] GameObject resultBoard;
     bool GameEnd = false;
@@ -42,18 +47,24 @@ public class payerConorl : NetworkBehaviour
     [SerializeField] float elixirSpeed = 0.5f;
     Image elixirBar;
 
+    [SerializeField] GameObject[] chosserImage;
+    [SerializeField] GameObject[] DeckAndProviderAndCloneImage;
+    bool startMenu = true;
+    [SerializeField] GameObject canvas;
 
 
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
         name = "PlayerBase";
-        GameObject.FindGameObjectWithTag("DeckProvider").GetComponent<spriteProviderControll>().player = this.gameObject;
+        // GameObject.FindGameObjectWithTag("DeckProvider").GetComponent<spriteProviderControll>().player = this.gameObject;
         if (board.transform.eulerAngles.x <= 180f) { BoardRotationX = board.transform.localEulerAngles.x; } else { BoardRotationX = board.transform.localEulerAngles.x - 360f; }
         if (board.transform.eulerAngles.y <= 180f) { BoardRotationY = board.transform.localEulerAngles.y; } else { BoardRotationY = board.transform.localEulerAngles.y - 360f; }
         if (board.transform.eulerAngles.z <= 180f) { BoardRotationZ = board.transform.localEulerAngles.z; } else { BoardRotationZ = board.transform.localEulerAngles.z - 360f; }
         BoardRotationX += 180;
         board.transform.localRotation = Quaternion.Euler(BoardRotationX, BoardRotationY, BoardRotationZ);
+        canvas.SetActive(true);
+
     }
 
 
@@ -65,6 +76,59 @@ public class payerConorl : NetworkBehaviour
 
     void Update()
     {
+        // if (isServer)
+        // {
+            if (startMenu)
+            {
+
+                for (int i = 0; i < chosserImage.Length; i++)
+                {
+                    GameObject[] children = new GameObject[GameObject.FindGameObjectsWithTag("Cards").Length];
+                    for (int j = 0; j < GameObject.FindGameObjectsWithTag("Cards").Length; j++)
+                    {
+                        children[j] = GameObject.FindGameObjectsWithTag("Cards")[j];
+                    }
+                    if (chosserImage[i].GetComponent<Image>().sprite == null)
+                    {
+                        int decknumber = Random.Range(0, children.Length);
+                        chosserImage[i].GetComponent<TroopInDeck>().DeckTroop = children[decknumber].GetComponent<TroopInDeck>().DeckTroop;
+                        chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage = children[decknumber].GetComponent<TroopInDeck>().DeckTroopImage;
+                        chosserImage[i].GetComponent<TroopInDeck>().Cost = children[decknumber].GetComponent<TroopInDeck>().Cost;
+                        chosserImage[i].GetComponent<Image>().sprite = chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage;
+                        Destroy(children[decknumber]);
+                    }
+                }
+                if (BlueTeam)
+                {
+                    if (GameObject.Find("blueCards").transform.GetChild(GameObject.Find("blueCards").transform.childCount - 1).GetComponent<TroopInDeck>().DeckTroop != null)
+                    {
+                        startMenu = false;
+                        Destroy(chosserImage[0]);
+                        Destroy(chosserImage[1]);
+                        Destroy(chosserImage[2]);
+                        for (int i = 0; i < DeckAndProviderAndCloneImage.Length; i++)
+                        {
+                            DeckAndProviderAndCloneImage[i].SetActive(true);
+                        }
+                    }
+                }
+                if (!BlueTeam)
+                {
+                    if (GameObject.Find("redCards").transform.GetChild(GameObject.Find("redCards").transform.childCount - 1).GetComponent<TroopInDeck>().DeckTroop != null)
+                    {
+                        startMenu = false;
+                        Destroy(chosserImage[0]);
+                        Destroy(chosserImage[1]);
+                        Destroy(chosserImage[2]);
+                        for (int i = 0; i < DeckAndProviderAndCloneImage.Length; i++)
+                        {
+                            DeckAndProviderAndCloneImage[i].SetActive(true);
+                        }
+                    }
+                }
+            }
+        // }
+
         if (transform.position == GameObject.Find("Pos 1").transform.position)
         {
             BlueTeam = true;
@@ -108,7 +172,7 @@ public class payerConorl : NetworkBehaviour
             GameEnd = true;
         }
 
-        if (!GameEnd)
+        if (!GameEnd && !startMenu)
         {
             if (elixirAmount <= 10)
             {
@@ -121,15 +185,24 @@ public class payerConorl : NetworkBehaviour
                 }
             }
 
-            if (Input.GetMouseButtonUp(0) && Troop != null)
+            // if (Troop != null)
+            // {
+            if (Input.GetMouseButton(0))
             {
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out hit))
                 {
+
                     if (elixirAmount > 0 + TroopCost)
                     {
-                        CmdcreatTroop(hit.point);
+                        if (Troop != null)
+                        {
+                            Cmdtroop();
+                        }
+
+
+
                         elixirAmount -= TroopCost;
                         if (myTroop != null)
                         {
@@ -137,26 +210,20 @@ public class payerConorl : NetworkBehaviour
                             myTroop.name = "MyArcher";
 
                         }
-                        deck.GetComponent<Image>().sprite = null;
-                        deck.GetComponent<TroopInDeck>().DeckTroop = null;
+                        if (deck != null)
+                        {
+                            deck.GetComponent<Image>().sprite = null;
+                            deck.GetComponent<TroopInDeck>().DeckTroop = null;
+                        }
                     }
                     Troop = null;
                     TroopCost = 0;
                     cloneImage.sprite = null;
-                    cloneImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 300);
+                    cloneImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 3000);
 
                 }
-                else
-                {
-                    Troop = null;
-                    TroopCost = 0;
-                    cloneImage.sprite = null;
-                    cloneImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 300);
-                }
-
             }
         }
-
     }
 
 
@@ -164,9 +231,9 @@ public class payerConorl : NetworkBehaviour
 
 
     [Command]
-    void CmdcreatTroop(Vector3 pos)
+    void Cmdtroop()
     {
-        myTroop = Instantiate(Troop, pos, Quaternion.identity) as GameObject;
+        myTroop = Instantiate(Troop, hit.point, Quaternion.identity) as GameObject;
         myTroop.GetComponent<HealthControler>().BlueTeam = this.BlueTeam;
         if (myTroop.GetComponent<subtroopCreat>() != null)
         {
@@ -177,12 +244,9 @@ public class payerConorl : NetworkBehaviour
                 submytroop.tag = "Player";
                 NetworkServer.SpawnWithClientAuthority(submytroop, connectionToClient);
             }
-
         }
         NetworkServer.SpawnWithClientAuthority(myTroop, connectionToClient);
-
     }
-
 
     [Command]
     void CmdTowerCreat(bool tellIsBlueTeam)
@@ -197,14 +261,10 @@ public class payerConorl : NetworkBehaviour
         NetworkServer.SpawnWithClientAuthority(Righttower, connectionToClient);
         NetworkServer.SpawnWithClientAuthority(middletower, connectionToClient);
     }
-
-
     void OnLocalScoreChanged(int updatedHealth)
     {
         ScoreText.text = updatedHealth.ToString();
     }
-
-
     [Command]
     public void CmdResult()
     {
@@ -231,7 +291,44 @@ public class payerConorl : NetworkBehaviour
 
     }
 
+    [Command]
+    public void CmdtroopChose(GameObject thisDeck)
+    {
+        if (this.BlueTeam)
+        {
+            for (int i = 0; i < GameObject.Find("blueCards").transform.childCount; i++)
+            {
+                if (GameObject.Find("blueCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroop == null)
+                {
+                    GameObject.Find("blueCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroop = thisDeck.GetComponent<TroopInDeck>().DeckTroop;
+                    GameObject.Find("blueCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroopImage = thisDeck.GetComponent<TroopInDeck>().DeckTroopImage;
+                    GameObject.Find("blueCards").transform.GetChild(i).GetComponent<TroopInDeck>().Cost = thisDeck.GetComponent<TroopInDeck>().Cost;
+                    chosserImage[0].GetComponent<Image>().sprite = null;
+                    chosserImage[1].GetComponent<Image>().sprite = null;
+                    chosserImage[2].GetComponent<Image>().sprite = null;
 
+                    return;
+                }
+            }
+        }
+        if (!this.BlueTeam)
+        {
+            for (int i = 0; i < GameObject.Find("redCards").transform.childCount; i++)
+            {
+                if (GameObject.Find("redCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroop == null)
+                {
+                    GameObject.Find("redCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroop = thisDeck.GetComponent<TroopInDeck>().DeckTroop;
+                    GameObject.Find("redCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroopImage = thisDeck.GetComponent<TroopInDeck>().DeckTroopImage;
+                    GameObject.Find("redCards").transform.GetChild(i).GetComponent<TroopInDeck>().Cost = thisDeck.GetComponent<TroopInDeck>().Cost;
+                    chosserImage[0].GetComponent<Image>().sprite = null;
+                    chosserImage[1].GetComponent<Image>().sprite = null;
+                    chosserImage[2].GetComponent<Image>().sprite = null;
+
+                    return;
+                }
+            }
+        }
+    }
 
 
 }

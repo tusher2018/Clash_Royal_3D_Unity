@@ -27,11 +27,7 @@ public class spriteProviderControll : MonoBehaviour
     {
         if (cloneImage.GetComponent<Image>().sprite != null)
         {
-            // Ray ray;
-            // RaycastHit hit;
-            // ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             cloneImage.transform.position = Input.mousePosition;
-            
         }
 
         for (int i = 0; i < OtherDeckAndProvider.Length; i++)
@@ -41,7 +37,8 @@ public class spriteProviderControll : MonoBehaviour
                 having[i] = OtherDeckAndProvider[i].GetComponent<Image>().sprite;
             }
         }
-        alldeck = allSpritesArray(GameObject.FindGameObjectsWithTag("TransferDeck"));
+        if (transform.root.GetComponent<payerConorl>().BlueTeam) { alldeck = allSpritesArray(GameObject.FindGameObjectsWithTag("bluecard")); }
+        if (!transform.root.GetComponent<payerConorl>().BlueTeam) { alldeck = allSpritesArray(GameObject.FindGameObjectsWithTag("redcard")); }
 
         if (image.sprite == null)
         {
@@ -111,20 +108,18 @@ public class spriteProviderControll : MonoBehaviour
         return newIndicesArray;
     }
 
-    public void deckClick(GameObject GiveThis)
+    public void CmddeckClick(GameObject GiveThis)
     {
         if (player != null)
         {
-            player.GetComponent<payerConorl>().Troop = GiveThis.GetComponent<TroopInDeck>().DeckTroop;
-            player.GetComponent<payerConorl>().TroopCost = GiveThis.GetComponent<TroopInDeck>().Cost;
+            player.GetComponent<payerConorl>().Troop = GiveThis.transform.GetComponent<TroopInDeck>().DeckTroop;
+            player.GetComponent<payerConorl>().TroopCost = GiveThis.transform.GetComponent<TroopInDeck>().Cost;
             player.GetComponent<payerConorl>().deck = GiveThis;
             cloneImage.GetComponent<RectTransform>().anchoredPosition = GiveThis.GetComponent<RectTransform>().anchoredPosition;
-            cloneImage.GetComponent<Image>().sprite=GiveThis.GetComponent<Image>().sprite;
-            player.GetComponent<payerConorl>().cloneImage =cloneImage.GetComponent<Image>();
+            cloneImage.GetComponent<Image>().sprite = GiveThis.GetComponent<Image>().sprite;
+            player.GetComponent<payerConorl>().cloneImage = cloneImage.GetComponent<Image>();
         }
     }
-
-
 
 
 }
