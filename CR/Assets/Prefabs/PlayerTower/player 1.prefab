@@ -1318,6 +1318,9 @@ MonoBehaviour:
   - {fileID: 1081928632454712}
   - {fileID: 1937890206666378}
   canvas: {fileID: 1975864160839652}
+  allcards: {fileID: 1102709813021654, guid: 9c27fb025d35a8747b65d642279ff5e8, type: 2}
+  bluecards: {fileID: 1657280026827512, guid: e47c844255f5d5448b77c159b50d8fa1, type: 2}
+  redcards: {fileID: 1276876812619838, guid: 8aea050af37af1548a48125d50f46257, type: 2}
 --- !u!114 &114682202952557226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1335,7 +1338,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114649349280451560}
-          m_MethodName: CallCmdtroopChose
+          m_MethodName: CmdtroopChose
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 1331054573300696}
@@ -1365,7 +1368,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114649349280451560}
-          m_MethodName: CallCmdtroopChose
+          m_MethodName: CmdtroopChose
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 1357581253951056}
@@ -1462,7 +1465,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114649349280451560}
-          m_MethodName: CallCmdtroopChose
+          m_MethodName: CmdtroopChose
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 1667672588986328}

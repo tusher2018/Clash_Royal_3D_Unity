@@ -47,10 +47,36 @@ public class payerConorl : NetworkBehaviour
     [SerializeField] float elixirSpeed = 0.5f;
     Image elixirBar;
 
-    [SerializeField] GameObject[] chosserImage;
+    public GameObject[] chosserImage;
     [SerializeField] GameObject[] DeckAndProviderAndCloneImage;
     bool startMenu = true;
+
     [SerializeField] GameObject canvas;
+    // [SyncVar] public string card1;
+    // [SyncVar] public string card2;
+    // [SyncVar] public string card3;
+    [SerializeField] GameObject allcards;
+    [SerializeField] GameObject bluecards;
+    [SerializeField] GameObject redcards;
+
+ [SyncVar] GameObject cc;
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        for (int i = 0; i < allcards.transform.childCount; i++)
+        {
+            NetworkServer.Spawn(Instantiate(allcards.transform.GetChild(i).gameObject));
+        }
+        for (int i = 0; i < bluecards.transform.childCount; i++)
+        {
+            NetworkServer.Spawn(Instantiate(bluecards.transform.GetChild(i).gameObject));
+        }
+        for (int i = 0; i < redcards.transform.childCount; i++)
+        {
+            NetworkServer.Spawn(Instantiate(redcards.transform.GetChild(i).gameObject));
+        }
+    }
+
 
 
     public override void OnStartLocalPlayer()
@@ -76,58 +102,77 @@ public class payerConorl : NetworkBehaviour
 
     void Update()
     {
-        // if (isServer)
-        // {
+        if (isServer)
+        {
+            if (startMenu)
+            {
+                RpcClickHandling();
+
+                // for (int i = 0; i < chosserImage.Length; i++)
+                // {
+                //     GameObject[] children = new GameObject[GameObject.FindGameObjectsWithTag("Cards").Length];
+                //     for (int j = 0; j < GameObject.FindGameObjectsWithTag("Cards").Length; j++)
+                //     {
+                //         children[j] = GameObject.FindGameObjectsWithTag("Cards")[j];
+                //     }
+                //     if (chosserImage[i].GetComponent<Image>().sprite == null)
+                //     {
+                //         int decknumber = Random.Range(0, children.Length);
+
+                //         chosserImage[i].GetComponent<TroopInDeck>().DeckTroop = children[decknumber].GetComponent<TroopInDeck>().DeckTroop;
+                //         chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage = children[decknumber].GetComponent<TroopInDeck>().DeckTroopImage;
+                //         chosserImage[i].GetComponent<TroopInDeck>().Cost = children[decknumber].GetComponent<TroopInDeck>().Cost;
+                //         chosserImage[i].GetComponent<Image>().sprite = chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage;
+                //         Destroy(children[decknumber]);
+                //         // if (i == 0) { card1 = chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage.name; }
+                //         // if (i == 1) { card2 = chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage.name; }
+                //         // if (i == 2) { card3 = chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage.name; }
+                //     }
+                // }
+                // if (BlueTeam)
+                // {
+                //     for (int i = 0; i < GameObject.FindGameObjectsWithTag("bluecard").Length; i++)
+                //     {
+                //         if (GameObject.FindGameObjectsWithTag("bluecard")[i].GetComponent<TroopInDeck>().DeckTroop != null) { startMenu = false; } else { startMenu = true; }
+                //     }
+                //     if (startMenu == false)
+                //     {
+                //         Destroy(chosserImage[0]);
+                //         Destroy(chosserImage[1]);
+                //         Destroy(chosserImage[2]);
+                //         for (int i = 0; i < DeckAndProviderAndCloneImage.Length; i++)
+                //         {
+                //             DeckAndProviderAndCloneImage[i].SetActive(true);
+                //         }
+                //     }
+                // }
+                // if (!BlueTeam)
+                // {
+                //     for (int i = 0; i < GameObject.FindGameObjectsWithTag("redcard").Length; i++)
+                //     {
+                //         if (GameObject.FindGameObjectsWithTag("redcard")[i].GetComponent<TroopInDeck>().DeckTroop != null) { startMenu = false; } else { startMenu = true; }
+                //     }
+                //     if (startMenu == false)
+                //     {
+                //         Destroy(chosserImage[0]);
+                //         Destroy(chosserImage[1]);
+                //         Destroy(chosserImage[2]);
+                //         for (int i = 0; i < DeckAndProviderAndCloneImage.Length; i++)
+                //         {
+                //             DeckAndProviderAndCloneImage[i].SetActive(true);
+                //         }
+                //     }
+                // }
+            }
+        }
+
+        if (isLocalPlayer)
+        {
             if (startMenu)
             {
 
-                for (int i = 0; i < chosserImage.Length; i++)
-                {
-                    GameObject[] children = new GameObject[GameObject.FindGameObjectsWithTag("Cards").Length];
-                    for (int j = 0; j < GameObject.FindGameObjectsWithTag("Cards").Length; j++)
-                    {
-                        children[j] = GameObject.FindGameObjectsWithTag("Cards")[j];
-                    }
-                    if (chosserImage[i].GetComponent<Image>().sprite == null)
-                    {
-                        int decknumber = Random.Range(0, children.Length);
-                        chosserImage[i].GetComponent<TroopInDeck>().DeckTroop = children[decknumber].GetComponent<TroopInDeck>().DeckTroop;
-                        chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage = children[decknumber].GetComponent<TroopInDeck>().DeckTroopImage;
-                        chosserImage[i].GetComponent<TroopInDeck>().Cost = children[decknumber].GetComponent<TroopInDeck>().Cost;
-                        chosserImage[i].GetComponent<Image>().sprite = chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage;
-                        Destroy(children[decknumber]);
-                    }
-                }
-                if (BlueTeam)
-                {
-                    if (GameObject.Find("blueCards").transform.GetChild(GameObject.Find("blueCards").transform.childCount - 1).GetComponent<TroopInDeck>().DeckTroop != null)
-                    {
-                        startMenu = false;
-                        Destroy(chosserImage[0]);
-                        Destroy(chosserImage[1]);
-                        Destroy(chosserImage[2]);
-                        for (int i = 0; i < DeckAndProviderAndCloneImage.Length; i++)
-                        {
-                            DeckAndProviderAndCloneImage[i].SetActive(true);
-                        }
-                    }
-                }
-                if (!BlueTeam)
-                {
-                    if (GameObject.Find("redCards").transform.GetChild(GameObject.Find("redCards").transform.childCount - 1).GetComponent<TroopInDeck>().DeckTroop != null)
-                    {
-                        startMenu = false;
-                        Destroy(chosserImage[0]);
-                        Destroy(chosserImage[1]);
-                        Destroy(chosserImage[2]);
-                        for (int i = 0; i < DeckAndProviderAndCloneImage.Length; i++)
-                        {
-                            DeckAndProviderAndCloneImage[i].SetActive(true);
-                        }
-                    }
-                }
             }
-        // }
+        }
 
         if (transform.position == GameObject.Find("Pos 1").transform.position)
         {
@@ -296,13 +341,13 @@ public class payerConorl : NetworkBehaviour
     {
         if (this.BlueTeam)
         {
-            for (int i = 0; i < GameObject.Find("blueCards").transform.childCount; i++)
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("bluecard").Length; i++)
             {
-                if (GameObject.Find("blueCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroop == null)
+                if (GameObject.FindGameObjectsWithTag("bluecard")[i].GetComponent<TroopInDeck>().DeckTroop == null)
                 {
-                    GameObject.Find("blueCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroop = thisDeck.GetComponent<TroopInDeck>().DeckTroop;
-                    GameObject.Find("blueCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroopImage = thisDeck.GetComponent<TroopInDeck>().DeckTroopImage;
-                    GameObject.Find("blueCards").transform.GetChild(i).GetComponent<TroopInDeck>().Cost = thisDeck.GetComponent<TroopInDeck>().Cost;
+                    GameObject.FindGameObjectsWithTag("bluecard")[i].GetComponent<TroopInDeck>().DeckTroop = thisDeck.GetComponent<TroopInDeck>().DeckTroop;
+                    GameObject.FindGameObjectsWithTag("bluecard")[i].GetComponent<TroopInDeck>().DeckTroopImage = thisDeck.GetComponent<TroopInDeck>().DeckTroopImage;
+                    GameObject.FindGameObjectsWithTag("bluecard")[i].GetComponent<TroopInDeck>().Cost = thisDeck.GetComponent<TroopInDeck>().Cost;
                     chosserImage[0].GetComponent<Image>().sprite = null;
                     chosserImage[1].GetComponent<Image>().sprite = null;
                     chosserImage[2].GetComponent<Image>().sprite = null;
@@ -310,16 +355,17 @@ public class payerConorl : NetworkBehaviour
                     return;
                 }
             }
+
         }
         if (!this.BlueTeam)
         {
-            for (int i = 0; i < GameObject.Find("redCards").transform.childCount; i++)
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("redcard").Length; i++)
             {
-                if (GameObject.Find("redCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroop == null)
+                if (GameObject.FindGameObjectsWithTag("redcard")[i].GetComponent<TroopInDeck>().DeckTroop == null)
                 {
-                    GameObject.Find("redCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroop = thisDeck.GetComponent<TroopInDeck>().DeckTroop;
-                    GameObject.Find("redCards").transform.GetChild(i).GetComponent<TroopInDeck>().DeckTroopImage = thisDeck.GetComponent<TroopInDeck>().DeckTroopImage;
-                    GameObject.Find("redCards").transform.GetChild(i).GetComponent<TroopInDeck>().Cost = thisDeck.GetComponent<TroopInDeck>().Cost;
+                    GameObject.FindGameObjectsWithTag("redcard")[i].GetComponent<TroopInDeck>().DeckTroop = thisDeck.GetComponent<TroopInDeck>().DeckTroop;
+                    GameObject.FindGameObjectsWithTag("redcard")[i].GetComponent<TroopInDeck>().DeckTroopImage = thisDeck.GetComponent<TroopInDeck>().DeckTroopImage;
+                    GameObject.FindGameObjectsWithTag("redcard")[i].GetComponent<TroopInDeck>().Cost = thisDeck.GetComponent<TroopInDeck>().Cost;
                     chosserImage[0].GetComponent<Image>().sprite = null;
                     chosserImage[1].GetComponent<Image>().sprite = null;
                     chosserImage[2].GetComponent<Image>().sprite = null;
@@ -329,7 +375,69 @@ public class payerConorl : NetworkBehaviour
             }
         }
     }
+    [ClientRpc]
+    private void RpcClickHandling()
+    {
+        for (int i = 0; i < chosserImage.Length; i++)
+        {
+            GameObject[] children = new GameObject[GameObject.FindGameObjectsWithTag("Cards").Length];
+            for (int j = 0; j < GameObject.FindGameObjectsWithTag("Cards").Length; j++)
+            {
+                children[j] = GameObject.FindGameObjectsWithTag("Cards")[j];
+            }
+            if (chosserImage[i].GetComponent<Image>().sprite == null)
+            {
+                int decknumber = Random.Range(0, children.Length);
 
+                chosserImage[i].GetComponent<TroopInDeck>().DeckTroop = children[decknumber].GetComponent<TroopInDeck>().DeckTroop;
+                chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage = children[decknumber].GetComponent<TroopInDeck>().DeckTroopImage;
+                chosserImage[i].GetComponent<TroopInDeck>().Cost = children[decknumber].GetComponent<TroopInDeck>().Cost;
+                chosserImage[i].GetComponent<Image>().sprite = chosserImage[i].GetComponent<TroopInDeck>().DeckTroopImage;
+                // Destroy(children[decknumber]);
+                CmdDestroyChooserImage(children[decknumber]);
+            }
+        }
+        if (BlueTeam)
+        {
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("bluecard").Length; i++)
+            {
+                if (GameObject.FindGameObjectsWithTag("bluecard")[i].GetComponent<TroopInDeck>().DeckTroop != null) { startMenu = false; } else { startMenu = true; }
+            }
+            if (startMenu == false)
+            {
+                Destroy(chosserImage[0]);
+                Destroy(chosserImage[1]);
+                Destroy(chosserImage[2]);
+
+                for (int i = 0; i < DeckAndProviderAndCloneImage.Length; i++)
+                {
+                    DeckAndProviderAndCloneImage[i].SetActive(true);
+                }
+            }
+        }
+        if (!BlueTeam)
+        {
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("redcard").Length; i++)
+            {
+                if (GameObject.FindGameObjectsWithTag("redcard")[i].GetComponent<TroopInDeck>().DeckTroop != null) { startMenu = false; } else { startMenu = true; }
+            }
+            if (startMenu == false)
+            {
+                Destroy(chosserImage[0]);
+                Destroy(chosserImage[1]);
+                Destroy(chosserImage[2]);
+                for (int i = 0; i < DeckAndProviderAndCloneImage.Length; i++)
+                {
+                    DeckAndProviderAndCloneImage[i].SetActive(true);
+                }
+            }
+        }
+    }
+    [Command]
+    public void CmdDestroyChooserImage(GameObject des)
+    {
+        NetworkServer.Destroy(des);
+    }
 
 }
 
